@@ -1,0 +1,16 @@
+@description "Enable Travis CI for a Rug project (Rug DSL)"
+editor EnableTravisRug
+
+param jfrog_user: .*
+param jfrog_password: .*
+param github_token: .*
+param repo_slug: .*
+param org: .*
+
+with travis t when path = ".travis.yml"
+  begin
+    do enable repo_slug github_token org
+    do encrypt repo_slug github_token org { "GITHUB_TOKEN=" + github_token }
+    do encrypt repo_slug github_token org { "JFROG_USER=" + jfrog_user }
+    do encrypt repo_slug github_token org { "JFROG_PASSWORD=" + jfrog_password }
+  end

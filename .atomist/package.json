@@ -1,0 +1,16 @@
+{
+  "name": "@atomist-rugs/travis-editors",
+  "version": "0.1.2",
+  "description": "Editors for enabling Travis CI",
+  "keywords": [
+    "Atomist",
+    "Rug",
+    "Travis"
+  ],
+  "author": "Atomist, Inc",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@atomist/travis": "0.1.2",
+    "@atomist/rug": "0.4.2"
+  }
+}

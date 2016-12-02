@@ -1,0 +1,10 @@
+group: atomist-rugs
+artifact: travis-editors
+version: "0.1.2"
+
+requires: "0.4.2"
+
+dependencies:
+
+extensions:
+  - "com.atomist:travis-rug-type:0.1.2"
