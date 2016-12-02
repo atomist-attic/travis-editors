@@ -1,10 +1,14 @@
-import * as rug from '@atomist/rug/Rug'
-import {Project} from '@atomist/rug/Rug'
+import {ProjectEditor} from "@atomist/rug/operations/ProjectEditor"
+import {Parameters, ParametersSupport} from "@atomist/rug/operations/Parameters"
+import {Status, Result} from "@atomist/rug/operations/Result"
+import {Project, Pair, File} from '@atomist/rug/model/Core'
+import {PathExpression, PathExpressionEngine, TreeNode, Match} from '@atomist/rug/tree/PathExpression'
+
 import {editor, inject, parameter, parameters} from '@atomist/rug/support/Metadata'
 
 import {Travis} from '@atomist/travis/core/Core'
 
-abstract class ContentInfo extends rug.ParametersSupport {
+abstract class ContentInfo extends ParametersSupport {
 
   @parameter({description: "Repo Slug (owner/repo)", displayName: "repo_slug", pattern: ".*", maxLength: 100})
   repo_slug: string = null
@@ -27,22 +31,22 @@ abstract class ContentInfo extends rug.ParametersSupport {
 }
 
 @editor("Enable Travis CI for a Rug project (Rug TS)")
-class EnableTravis implements rug.ProjectEditor<rug.Parameters>  {
+class EnableTravis implements ProjectEditor<Parameters>  {
 
-    private eng: rug.PathExpressionEngine;
+    private eng: PathExpressionEngine;
 
-    constructor(@inject("PathExpressionEngine") _eng: rug.PathExpressionEngine) {
+    constructor(@inject("PathExpressionEngine") _eng: PathExpressionEngine) {
       this.eng = _eng;
     }
 
-    edit(project: rug.Project, @parameters("ContentInfo") p: ContentInfo): rug.Result {
+    edit(project: Project, @parameters("ContentInfo") p: ContentInfo): Result {
       console.log("  Copying .travis.yml");
       project.copyEditorBackingFileOrFail(".atomist/templates/.travis.yml", ".travis.yml");
 
       console.log("  Copying travis-build.bash");
       project.copyEditorBackingFileOrFail(".atomist/templates/travis-build.bash", "travis-build.bash");
 
-      var pe = new rug.PathExpression<rug.Project, Travis>(`/*[name='.travis.yml']/->travis`);
+      var pe = new PathExpression<Project, Travis>(`/*[name='.travis.yml']/->travis`);
       let t: Travis = this.eng.scalar(project, pe);
 
       console.log(`  Enabling Travis for ${project.name()}`);
@@ -53,6 +57,6 @@ class EnableTravis implements rug.ProjectEditor<rug.Parameters>  {
       t.encrypt(p.repo_slug, p.travis_token, p.org, ("JFROG_USER=" + p.jfrog_user).toString());
       t.encrypt(p.repo_slug, p.travis_token, p.org, ("JFROG_PASSWORD=" + p.jfrog_password).toString());
 
-      return new rug.Result(rug.Status.Success, "Repository enabled on Travis")
+      return new Result(Status.Success, "Repository enabled on Travis")
     }
   }
