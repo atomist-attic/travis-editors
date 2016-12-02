@@ -16,7 +16,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var rug = require("@atomist/rug/Rug");
+var Parameters_1 = require("@atomist/rug/operations/Parameters");
+var Result_1 = require("@atomist/rug/operations/Result");
+var PathExpression_1 = require("@atomist/rug/tree/PathExpression");
 var Metadata_1 = require("@atomist/rug/support/Metadata");
 var ContentInfo = (function (_super) {
     __extends(ContentInfo, _super);
@@ -31,7 +33,7 @@ var ContentInfo = (function (_super) {
         return _this;
     }
     return ContentInfo;
-}(rug.ParametersSupport));
+}(Parameters_1.ParametersSupport));
 __decorate([
     Metadata_1.parameter({ description: "Repo Slug (owner/repo)", displayName: "repo_slug", pattern: ".*", maxLength: 100 }),
     __metadata("design:type", String)
@@ -65,7 +67,7 @@ var EnableTravis = (function () {
         project.copyEditorBackingFileOrFail(".atomist/templates/.travis.yml", ".travis.yml");
         console.log("  Copying travis-build.bash");
         project.copyEditorBackingFileOrFail(".atomist/templates/travis-build.bash", "travis-build.bash");
-        var pe = new rug.PathExpression("/*[name='.travis.yml']/->travis");
+        var pe = new PathExpression_1.PathExpression("/*[name='.travis.yml']/->travis");
         var t = this.eng.scalar(project, pe);
         console.log("  Enabling Travis for " + project.name());
         t.enable(p.repo_slug, p.travis_token, p.org);
@@ -73,7 +75,7 @@ var EnableTravis = (function () {
         t.encrypt(p.repo_slug, p.travis_token, p.org, ("GITHUB_TOKEN=" + p.github_token).toString());
         t.encrypt(p.repo_slug, p.travis_token, p.org, ("JFROG_USER=" + p.jfrog_user).toString());
         t.encrypt(p.repo_slug, p.travis_token, p.org, ("JFROG_PASSWORD=" + p.jfrog_password).toString());
-        return new rug.Result(rug.Status.Success, "Repository enabled on Travis");
+        return new Result_1.Result(Result_1.Status.Success, "Repository enabled on Travis");
     };
     return EnableTravis;
 }());
@@ -81,7 +83,7 @@ __decorate([
     __param(1, Metadata_1.parameters("ContentInfo")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, ContentInfo]),
-    __metadata("design:returntype", rug.Result)
+    __metadata("design:returntype", Result_1.Result)
 ], EnableTravis.prototype, "edit", null);
 EnableTravis = __decorate([
     Metadata_1.editor("Enable Travis CI for a Rug project (Rug TS)"),
