@@ -4,7 +4,7 @@ import {Status, Result} from "@atomist/rug/operations/Result"
 import {Project, Pair, File} from '@atomist/rug/model/Core'
 import {PathExpression, PathExpressionEngine, TreeNode, Match} from '@atomist/rug/tree/PathExpression'
 
-import {editor, inject, parameter, parameters} from '@atomist/rug/support/Metadata'
+import {editor, inject, parameter, parameters, tag} from '@atomist/rug/support/Metadata'
 
 import {Travis} from '@atomist/travis/core/Core'
 
@@ -31,6 +31,8 @@ abstract class ContentInfo extends ParametersSupport {
 }
 
 @editor("Enable Travis CI for a Rug project (Rug TS)")
+@tag("test1")
+@tag("test2")
 class EnableTravis implements ProjectEditor<Parameters>  {
 
     private eng: PathExpressionEngine;
