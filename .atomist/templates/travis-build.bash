@@ -3,7 +3,7 @@
 set -o pipefail
 
 declare Pkg=travis-build
-declare Version=0.1.0
+declare Version=0.2.0
 
 function msg() {
     echo "$Pkg: $*"
@@ -54,10 +54,16 @@ function main () {
     rug="$rug -qX"
 
     msg "running tests"
-    $rug test
+    if ! $rug test; then
+        err "rug test failed"
+        return 1
+    fi
 
     msg "installing archive"
-    $rug install
+    if ! $rug install; then
+        err "rug install failed"
+        return 1
+    fi
 
     local archive_version project_version cli_yml_url
     archive_version=$(awk -F: '$1 == "version" { print $2 }' .atomist/manifest.yml | sed 's/[^.0-9]//g')
