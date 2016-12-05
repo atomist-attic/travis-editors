@@ -69,13 +69,11 @@ var EnableTravis = (function () {
         project.copyEditorBackingFileOrFail(".atomist/templates/travis-build.bash", "travis-build.bash");
         var pe = new PathExpression_1.PathExpression("/*[name='.travis.yml']/->travis");
         var t = this.eng.scalar(project, pe);
-        console.log("  Enabling Travis for " + project.name());
         t.enable(p.repo_slug, p.travis_token, p.org);
-        console.log("  Encrypting env variables");
         t.encrypt(p.repo_slug, p.travis_token, p.org, ("GITHUB_TOKEN=" + p.github_token).toString());
         t.encrypt(p.repo_slug, p.travis_token, p.org, ("JFROG_USER=" + p.jfrog_user).toString());
         t.encrypt(p.repo_slug, p.travis_token, p.org, ("JFROG_PASSWORD=" + p.jfrog_password).toString());
-        return new Result_1.Result(Result_1.Status.Success, "Repository enabled on Travis");
+        return new Result_1.Result(Result_1.Status.Success, "Repository enabled on Travis CI");
     };
     return EnableTravis;
 }());
