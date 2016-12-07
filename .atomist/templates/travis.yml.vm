@@ -1,3 +1,5 @@
+dist: trusty
+sudo: false
 language: java
 jdk:
 - oraclejdk8
@@ -7,8 +9,9 @@ branches:
 env:
   global:
   - MAVEN_BASE_URL=$maven_base_url
-install: true
-script: bash build/travis-build.bash
+install:
+- nvm install 6.9.2
+script: bash .atomist/build/travis-build.bash
 notifications:
   email: false
   webhooks:

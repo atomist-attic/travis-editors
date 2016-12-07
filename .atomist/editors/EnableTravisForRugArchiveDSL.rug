@@ -35,15 +35,8 @@ param repo_slug: ^[-\w.]+/[-\w.]+$
 @default '.org'
 param org: ^\.(org|com)$
 
-@displayName "Travis CI Token"
-@description "Travis CI user token, available on the user profile page, e.g., https//travis-ci.org/profile/USERNAME"
-@validInput "A 20-character, valid Travis CI token consisting of upper- and lower-case letters and digits"
-@minLength 20
-@maxLength 20
-param travis_token: ^[A-Za-z0-9]{20}$
-
 @displayName "GitHub Token"
-@description "GitHub Personal Access Token with repo access, generated at https//github.com/settings/tokens"
+@description "GitHub Personal Access Token of the repo owner with the following scopes: repo, write:repo_hook, user:email, and read:org, generated at https://github.com/settings/tokens; if the repo owner is an organization, the token must belong to a user in the Owner group of the organization"
 @validInput "A valid 40-character, lower-case hexadecimal GitHub Personal Access token"
 @minLength 40
 @maxLength 40
@@ -72,7 +65,7 @@ param maven_user: ^.*$
 param maven_token: ^.*$
 
 let templateDir = ".atomist/templates/"
-let buildDir = "build"
+let buildDir = ".atomist/build"
 let travisBuild = "travis-build.bash"
 let cliRelease = "cli-release.yml"
 let cliDev = "cli-dev.yml"
@@ -83,16 +76,18 @@ with project p when directoryExists ".atomist"
 
     do deleteFile travisBuild
     do addDirectoryAndIntermediates buildDir
+    do deleteFile { buildDir + "/" + travisBuild }
     do copyEditorBackingFileOrFail { templateDir + travisBuild } { buildDir + "/" + travisBuild }
+    do deleteFile { buildDir + "/" + cliRelease }
     do copyEditorBackingFileOrFail { templateDir + cliRelease } { buildDir + "/" + cliRelease }
+    do deleteFile { buildDir + "/" + cliDev }
     do copyEditorBackingFileOrFail { templateDir + cliDev } { buildDir + "/" + cliDev }
 
-  end
-
-with travis t when path = ".travis.yml"
-  begin
-    do enable repo_slug travis_token org
-    do encrypt repo_slug github_token org { "GITHUB_TOKEN=" + github_token }
-    do encrypt repo_slug github_token org { "MAVEN_USER=" + maven_user }
-    do encrypt repo_slug github_token org { "MAVEN_TOKEN=" + maven_token }
+    with travis t when path = ".travis.yml"
+      begin
+        do enable repo_slug github_token org
+        do encrypt repo_slug github_token org { "GITHUB_TOKEN=" + github_token }
+        do encrypt repo_slug github_token org { "MAVEN_USER=" + maven_user }
+        do encrypt repo_slug github_token org { "MAVEN_TOKEN=" + maven_token }
+      end
   end

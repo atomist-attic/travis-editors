@@ -48,8 +48,8 @@ abstract class ContentInfo extends ParametersSupport {
 
     @parameter({
         displayName: "GitHub Token",
-        description: "GitHub Personal Access Token with repo access, generated at https://github.com/settings/tokens",
-        validInput: "A valid 41-character, lower-case hexadecimal GitHub Personal Access token",
+        description: "GitHub Personal Access Token of the repo owner with the following scopes: repo, write:repo_hook, user:email, and read:org, generated at https://github.com/settings/tokens; if the repo owner is an organization, the token must belong to a user in the Owner group of the organization",
+        validInput: "A valid 40-character, lower-case hexadecimal GitHub Personal Access token",
         minLength: 40,
         maxLength: 40,
         pattern: "^[a-f0-9]{40}$",
@@ -102,21 +102,21 @@ class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
 
     edit(project: Project, @parameters("ContentInfo") p: ContentInfo): Result {
         if (project.directoryExists(".atomist")) {
-            console.log("  Templating .travis.yml");
+            let travisBuild: string = "travis-build.bash"
+            project.deleteFile(travisBuild)
+
             project.merge("travis.yml.vm", ".travis.yml", { "maven_base_url": p.maven_base_url });
 
-            let buildDir: string = "build"
+            let buildDir: string = ".atomist/build"
             project.addDirectory(buildDir, ".")
-            let travisBuild: string = "travis-build.bash"
             for (let f of [travisBuild, "cli-release.yml", "cli-dev.yml"]) {
-                console.log("  Copying " + f);
-                project.copyEditorBackingFileOrFail(".atomist/templates/" + f, buildDir + "/" + f);
+                let dest = buildDir + "/" + f
+                project.deleteFile(dest)
+                project.copyEditorBackingFileOrFail(".atomist/templates/" + f, dest);
             }
-            project.deleteFile(travisBuild)
 
             var pe = new PathExpression<Project, Travis>(`->travis`);
             let t: Travis = this.eng.scalar(project, pe);
-
             t.enable(p.repo_slug, p.github_token, p.org);
             t.encrypt(p.repo_slug, p.github_token, p.org, ("GITHUB_TOKEN=" + p.github_token).toString());
             t.encrypt(p.repo_slug, p.github_token, p.org, ("MAVEN_USER=" + p.maven_user).toString());
@@ -127,4 +127,5 @@ class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
             return new Result(Status.NoChange, "Repository does not contain a Rug Archive")
         }
     }
+
 }

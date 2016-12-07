@@ -55,6 +55,14 @@ function main () {
     fi
     rug="$rug -qX"
 
+    if [[ -f .atomist/package.json ]]; then
+        msg "running npm install"
+        if ! ( cd .atomist && npm install ); then
+            err "npm install failed"
+            return 1
+        fi
+    fi
+
     msg "running tests"
     if ! $rug test; then
         err "rug test failed"
@@ -74,7 +82,7 @@ function main () {
     if [[ -f $manifest ]]; then
         archive_version=$(awk -F: '$1 == "version" { print $2 }' "$manifest" | sed 's/[^.0-9]//g')
     elif [[ -f $package ]]; then
-        archive_version=$(jq -er .version "$package")
+        archive_version=$(jq --raw-output --exit-status .version "$package")
     else
         err "no manifest.yml or package.json in archive"
         return 1
@@ -83,6 +91,7 @@ function main () {
         err "failed to extract archive version: $archive_version"
         return 1
     fi
+    local build_dir=.atomist/build
     local project_version cli_yml
     if [[ $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
         if [[ $archive_version != $TRAVIS_TAG ]]; then
@@ -90,7 +99,7 @@ function main () {
             return 1
         fi
         project_version=$TRAVIS_TAG
-        cli_yml=build/cli-release.yml
+        cli_yml=$build_dir/cli-release.yml
     else
         local timestamp
         timestamp=$(date +%Y%m%d%H%M%S)
@@ -99,7 +108,7 @@ function main () {
             return 1
         fi
         project_version=$archive_version-$timestamp
-        cli_yml=build/cli-dev.yml
+        cli_yml=$build_dir/cli-dev.yml
     fi
     msg "branch: $TRAVIS_BRANCH"
     msg "archive version: $project_version"
