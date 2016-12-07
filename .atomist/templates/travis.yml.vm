@@ -1,6 +1,4 @@
 language: java
-install: true
-script: bash travis-build.bash
 jdk:
 - oraclejdk8
 branches:
@@ -8,6 +6,9 @@ branches:
   - /\+travis\d+$/
 env:
   global:
+  - MAVEN_BASE_URL=$maven_base_url
+install: true
+script: bash build/travis-build.bash
 notifications:
   email: false
   webhooks:
