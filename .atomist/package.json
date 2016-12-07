@@ -15,6 +15,6 @@
   },
   "dependencies": {
     "@atomist/travis": "0.1.3",
-    "@atomist/rug": "0.4.6"
+    "@atomist/rug": "0.5.0"
   }
 }

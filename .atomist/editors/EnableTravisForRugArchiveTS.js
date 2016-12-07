@@ -60,11 +60,8 @@ __decorate([
 __decorate([
     Metadata_1.parameter({
         displayName: "Travis CI Token",
-        description: "Travis CI user token, available on the user profile page, e.g., https://travis-ci.org/profile/USERNAME",
-        validInput: "A 21-character, valid Travis CI token consisting of upper- and lower-case letters and digits",
-        minLength: 20,
-        maxLength: 20,
-        pattern: "^[A-Za-z0-9]{20}$",
+        description: "Travis CI user token, see https://docs.travis-ci.com/api#authentication",
+        validInput: "A valid Travis CI token consisting",
     }),
     __metadata("design:type", String)
 ], ContentInfo.prototype, "travis_token", void 0);
@@ -119,7 +116,7 @@ var EnableTravisForRugArchiveTS = (function () {
     EnableTravisForRugArchiveTS.prototype.edit = function (project, p) {
         if (project.directoryExists(".atomist")) {
             console.log("  Templating .travis.yml");
-            project.merge(".atomist/templates/travis.yml.vm", ".travis.yml", { "maven_base_url": p.maven_base_url });
+            project.merge("travis.yml.vm", ".travis.yml", { "maven_base_url": p.maven_base_url });
             var buildDir = "build";
             project.addDirectory(buildDir, ".");
             var travisBuild = "travis-build.bash";
@@ -129,7 +126,7 @@ var EnableTravisForRugArchiveTS = (function () {
                 project.copyEditorBackingFileOrFail(".atomist/templates/" + f, buildDir + "/" + f);
             }
             project.deleteFile(travisBuild);
-            var pe = new PathExpression_1.PathExpression("/*[name='.travis.yml']/->travis");
+            var pe = new PathExpression_1.PathExpression("->travis");
             var t = this.eng.scalar(project, pe);
             t.enable(p.repo_slug, p.travis_token, p.org);
             t.encrypt(p.repo_slug, p.travis_token, p.org, ("GITHUB_TOKEN=" + p.github_token).toString());

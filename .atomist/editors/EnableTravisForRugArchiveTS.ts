@@ -48,11 +48,11 @@ abstract class ContentInfo extends ParametersSupport {
 
     @parameter({
         displayName: "Travis CI Token",
-        description: "Travis CI user token, available on the user profile page, e.g., https://travis-ci.org/profile/USERNAME",
-        validInput: "A 21-character, valid Travis CI token consisting of upper- and lower-case letters and digits",
-        minLength: 20,
-        maxLength: 20,
-        pattern: "^[A-Za-z0-9]{20}$",
+        description: "Travis CI user token, see https://docs.travis-ci.com/api#authentication",
+        validInput: "A valid Travis CI token consisting",
+        //minLength: 20,
+        //maxLength: 20,
+        //pattern: "^[A-Za-z0-9]{20}$",
     })
     travis_token: string = null
 
@@ -113,7 +113,7 @@ class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
     edit(project: Project, @parameters("ContentInfo") p: ContentInfo): Result {
         if (project.directoryExists(".atomist")) {
             console.log("  Templating .travis.yml");
-            project.merge(".atomist/templates/travis.yml.vm", ".travis.yml", { "maven_base_url": p.maven_base_url });
+            project.merge("travis.yml.vm", ".travis.yml", { "maven_base_url": p.maven_base_url });
 
             let buildDir: string = "build"
             project.addDirectory(buildDir, ".")
@@ -124,7 +124,7 @@ class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
             }
             project.deleteFile(travisBuild)
 
-            var pe = new PathExpression<Project, Travis>(`/*[name='.travis.yml']/->travis`);
+            var pe = new PathExpression<Project, Travis>(`->travis`);
             let t: Travis = this.eng.scalar(project, pe);
 
             t.enable(p.repo_slug, p.travis_token, p.org);
