@@ -47,16 +47,6 @@ abstract class ContentInfo extends ParametersSupport {
     org: string = ".org"
 
     @parameter({
-        displayName: "Travis CI Token",
-        description: "Travis CI user token, see https://docs.travis-ci.com/api#authentication",
-        validInput: "A valid Travis CI token consisting",
-        //minLength: 20,
-        //maxLength: 20,
-        //pattern: "^[A-Za-z0-9]{20}$",
-    })
-    travis_token: string = null
-
-    @parameter({
         displayName: "GitHub Token",
         description: "GitHub Personal Access Token with repo access, generated at https://github.com/settings/tokens",
         validInput: "A valid 41-character, lower-case hexadecimal GitHub Personal Access token",
@@ -127,14 +117,14 @@ class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
             var pe = new PathExpression<Project, Travis>(`->travis`);
             let t: Travis = this.eng.scalar(project, pe);
 
-            t.enable(p.repo_slug, p.travis_token, p.org);
-            t.encrypt(p.repo_slug, p.travis_token, p.org, ("GITHUB_TOKEN=" + p.github_token).toString());
-            t.encrypt(p.repo_slug, p.travis_token, p.org, ("MAVEN_USER=" + p.maven_user).toString());
-            t.encrypt(p.repo_slug, p.travis_token, p.org, ("MAVEN_TOKEN=" + p.maven_token).toString());
+            t.enable(p.repo_slug, p.github_token, p.org);
+            t.encrypt(p.repo_slug, p.github_token, p.org, ("GITHUB_TOKEN=" + p.github_token).toString());
+            t.encrypt(p.repo_slug, p.github_token, p.org, ("MAVEN_USER=" + p.maven_user).toString());
+            t.encrypt(p.repo_slug, p.github_token, p.org, ("MAVEN_TOKEN=" + p.maven_token).toString());
 
             return new Result(Status.Success, "Repository enabled on Travis CI")
         } else {
-            return new Result(Status.Success, "Repository does not contain a Rug Archive")
+            return new Result(Status.NoChange, "Repository does not contain a Rug Archive")
         }
     }
 }
