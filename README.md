@@ -1,5 +1,8 @@
 # Atomist 'travis-editors'
 
+[![Build Status](https://travis-ci.org/atomist-rugs/travis-editors.svg?branch=master)](https://travis-ci.org/atomist-rugs/travis-editors)
+[![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
+
 This [Rug](http://docs.atomist.com/) archive has an editors that
 enable and configure a [Travis CI](https://travis-ci.org/) build for a
 GitHub repository.  These Rugs work with both public (travis-ci.org)
