@@ -1,6 +1,6 @@
 {
   "name": "@atomist-rugs/travis-editors",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Editors for enabling Travis CI",
   "keywords": [
     "Atomist",
