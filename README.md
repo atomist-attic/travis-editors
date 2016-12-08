@@ -14,8 +14,9 @@ and private (travis-ci.com) builds.
 
 The EnableTravisForRugArchiveDSL and EnableTravisForRugArchiveTS are
 implementations of the exact same functionality using two different
-Rug languages: the Rug DSL and [TypeScript][ts].
+Rug languages: the [Rug DSL][rug] and [TypeScript][ts].
 
+[rug]: http://docs.atomist.com/
 [ts]: https://www.typescriptlang.org/
 
 #### Prerequisites
