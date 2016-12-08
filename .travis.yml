@@ -1,5 +1,8 @@
+dist: trusty
+sudo: false
 language: java
-install: true
+install:
+- nvm install 6.9.2
 script: bash travis-build.bash
 jdk:
 - oraclejdk8

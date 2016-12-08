@@ -3,7 +3,7 @@
 set -o pipefail
 
 declare Pkg=travis-build
-declare Version=0.2.0
+declare Version=0.2.1
 
 function msg() {
     echo "$Pkg: $*"
@@ -53,6 +53,14 @@ function main () {
     fi
     rug="$rug -qX"
 
+    if [[ -f .atomist/package.json ]]; then
+        msg "running npm install"
+        if ! ( cd .atomist && npm install ); then
+            err "npm install failed"
+            return 1
+        fi
+    fi
+
     msg "running tests"
     if ! $rug test; then
         err "rug test failed"
@@ -65,12 +73,21 @@ function main () {
         return 1
     fi
 
-    local archive_version project_version cli_yml_url
-    archive_version=$(awk -F: '$1 == "version" { print $2 }' .atomist/manifest.yml | sed 's/[^.0-9]//g')
-    if [[ $? -ne 0 || ! $archive_version ]]; then
-        err "failed to extract archive version from manifest: $archive_version"
+    local archive_version
+    local manifest=.atomist/manifest.yml package=.atomist/package.json
+    if [[ -f $manifest ]]; then
+        archive_version=$(awk -F: '$1 == "version" { print $2 }' "$manifest" | sed 's/[^.0-9]//g')
+    elif [[ -f $package ]]; then
+        archive_version=$(jq --raw-output --exit-status .version "$package")
+    else
+        err "no manifest.yml or package.json in archive"
         return 1
     fi
+    if [[ $? -ne 0 || ! $archive_version ]]; then
+        err "failed to extract archive version: $archive_version"
+        return 1
+    fi
+    local project_version cli_yml_url
     if [[ $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
         if [[ $archive_version != $TRAVIS_TAG ]]; then
             err "archive version ($archive_version) does not match git tag ($TRAVIS_TAG)"
