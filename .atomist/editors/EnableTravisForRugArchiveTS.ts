@@ -118,9 +118,9 @@ class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
             var pe = new PathExpression<Project, Travis>(`->travis`);
             let t: Travis = this.eng.scalar(project, pe);
             t.enable(p.repo_slug, p.github_token, p.org);
-            t.encrypt(p.repo_slug, p.github_token, p.org, ("GITHUB_TOKEN=" + p.github_token).toString());
-            t.encrypt(p.repo_slug, p.github_token, p.org, ("MAVEN_USER=" + p.maven_user).toString());
-            t.encrypt(p.repo_slug, p.github_token, p.org, ("MAVEN_TOKEN=" + p.maven_token).toString());
+            t.encrypt(p.repo_slug, p.github_token, p.org, "GITHUB_TOKEN=" + p.github_token);
+            t.encrypt(p.repo_slug, p.github_token, p.org, "MAVEN_USER=" + p.maven_user);
+            t.encrypt(p.repo_slug, p.github_token, p.org, "MAVEN_TOKEN=" + p.maven_token);
 
             return new Result(Status.Success, "Repository enabled on Travis CI")
         } else {
