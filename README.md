@@ -42,6 +42,7 @@ To run this editor, you must supply the following parameters.
     -    `write:repo_hook`: for Travis CI
     -    `user:email`: for Travis CI
     -    `read:org`: for Travis CI
+
     The token must be a from a GitHub user who is an owner of the
     repository.  If the owner of the repository is a GitHub
     organization, this means the token must be from a user in the
