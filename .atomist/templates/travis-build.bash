@@ -114,7 +114,7 @@ function main () {
     msg "archive version: $project_version"
 
     if [[ $TRAVIS_BRANCH == master || $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        if ! "$cli_yml" $HOME/.atomist/cli.yml; then
+        if ! cp "$cli_yml" $HOME/.atomist/cli.yml; then
             err "failed to install $cli_yml"
             return 1
         fi
