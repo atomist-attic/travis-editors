@@ -30,5 +30,7 @@ then
     and fileExists buildScript
 	and fileContains settings "ATOMIST_REPO_TOKEN"
 	and fileContains settings "public-atomist-dev"
-	and fileContains buildScript "Unable to determine version"
+	and fileContains buildScript "failed to parse project version"
 	and fileContains buildScript "DaltDeploymentRepository"
+	and fileContains buildScript "function main"
+	and fileContains buildScript "not publishing or tagging pull request"
