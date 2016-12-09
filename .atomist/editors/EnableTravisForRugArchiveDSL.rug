@@ -17,6 +17,7 @@
 @description "Enable Travis CI for a Rug Archive project (Rug DSL version)"
 @tag "travis-ci"
 @tag "continuous-integration"
+@tag "github"
 @tag "rug"
 editor EnableTravisForRugArchiveDSL
 

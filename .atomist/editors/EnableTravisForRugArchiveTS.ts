@@ -91,6 +91,7 @@ abstract class ContentInfo extends ParametersSupport {
 @editor("Enable Travis CI for a Rug Archive project (Rug TypeScript version)")
 @tag("travis-ci")
 @tag("continous-integration")
+@tag("github")
 @tag("rug")
 class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
 

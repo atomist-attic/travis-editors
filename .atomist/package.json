@@ -13,6 +13,10 @@
     "type": "git",
     "url": "https://github.com/atomist-rugs/travis-editors.git"
   },
+  "bugs": {
+    "url": "https://github.com/atomist-rugs/travis-editors/issues"
+  },
+  "homepage": "https://github.com/atomist-rugs/travis-editors",
   "dependencies": {
     "@atomist/travis": "0.2.0",
     "@atomist/rug": "0.5.1"
