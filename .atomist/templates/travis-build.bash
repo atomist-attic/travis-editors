@@ -43,7 +43,7 @@ function main () {
 
         local rug_cli_url=https://github.com/atomist/rug-cli/releases/download/$version/rug-cli-$version-bin.tar.gz
         local rug_cli_tgz=$HOME/.atomist/rug-cli-$version.tar.gz
-        if ! curl -s -f -o "$rug_cli_tgz" "$rug_cli_url"; then
+        if ! curl -s -f -L -o "$rug_cli_tgz" "$rug_cli_url"; then
             err "failed to download rug CLI from $rug_cli_url"
             return 1
         fi
