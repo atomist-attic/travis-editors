@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.2.0...HEAD
 
+## [0.3.0] - 2016-12-09
+
+[0.3.0]: https://github.com/atomist-rugs/travis-editors/compare/0.2.0...0.3.0
+
+Iron maven release
+
+### Added
+
+-  Add UpdateTravisMaven Editor
+
 ## [0.2.0] - 2016-12-08
 
 [0.2.0]: https://github.com/atomist-rugs/travis-editors/compare/0.1.2...0.2.0
