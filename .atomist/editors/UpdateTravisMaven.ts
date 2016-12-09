@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Atomist
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,10 +27,8 @@ class UpdateTravisMaven extends ParameterlessProjectEditor {
 
     editWithoutParameters(project: Project): Result {
         if (project.fileExists("pom.xml")) {
-            project.deleteFile(".settings.xml");
-            project.copyEditorBackingFileOrFail(".atomist/templates/settings.xml", ".settings.xml");
-            project.deleteFile("travis-build.bash");
-            project.copyEditorBackingFileOrFail(".atomist/templates/travis-build-mvn.bash", "travis-build.bash");
+            project.merge("settings.xml.vm", ".settings.xml", {});
+            project.merge("travis-build-mvn.bash.vm", "travis-build.bash", {});
             return new Result(Status.Success, "Update Travis Maven build files")
         } else {
             return new Result(Status.NoChange, "Not a Maven build")
