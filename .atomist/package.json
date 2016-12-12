@@ -22,8 +22,8 @@
     "@atomist/rug": "0.5.4"
   },
   "scripts": {
-    "install": "rug install -urX",
-    "test": "rug test -urX",
-    "publish": "rug publish -urX"
+    "rug-install": "rug install -urX",
+    "rug-test": "rug test -urX",
+    "rug-publish": "rug publish -urX"
   }
 }
