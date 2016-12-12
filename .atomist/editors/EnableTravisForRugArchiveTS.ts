@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Atomist
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,6 +91,7 @@ abstract class ContentInfo extends ParametersSupport {
 @editor("Enable Travis CI for a Rug Archive project (Rug TypeScript version)")
 @tag("travis-ci")
 @tag("continous-integration")
+@tag("github")
 @tag("rug")
 class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
 
