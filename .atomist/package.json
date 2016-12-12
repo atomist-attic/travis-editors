@@ -19,6 +19,11 @@
   "homepage": "https://github.com/atomist-rugs/travis-editors",
   "dependencies": {
     "@atomist/travis": "0.2.0",
-    "@atomist/rug": "0.5.1"
+    "@atomist/rug": "0.5.4"
+  },
+  "scripts": {
+    "install": "rug install -urX",
+    "test": "rug test -urX",
+    "publish": "rug publish -urX"
   }
 }
