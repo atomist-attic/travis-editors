@@ -55,6 +55,7 @@ function main () {
     fi
     rug="$rug -qurX"
 
+    local build_dir=.atomist/build
     local cli_user=$HOME/.atomist/cli.yml
     if ! install --mode=0600 "$build_dir/cli-build.yml" "$cli_user"; then
         err "failed to install build cli.yml"
@@ -98,7 +99,6 @@ function main () {
         err "failed to extract archive version: $archive_version"
         return 1
     fi
-    local build_dir=.atomist/build
     local project_version cli_yml
     if [[ $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
         if [[ $archive_version != $TRAVIS_TAG ]]; then
