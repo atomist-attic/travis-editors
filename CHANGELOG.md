@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.3.0...HEAD
 
 ## [0.3.0] - 2016-12-09
 
@@ -17,7 +17,15 @@ Iron maven release
 
 ### Added
 
--  Add UpdateTravisMaven Editor
+-   Add UpdateTravisMaven Editor and UpdateTravisMavenBuild Executor
+
+### Changed
+
+-   Switch from .atomistignore to .atomist/ignore
+
+### Fixed
+
+-   Fixed Travis build script for Rug archives
 
 ## [0.2.0] - 2016-12-08
 
