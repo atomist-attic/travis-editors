@@ -91,6 +91,39 @@ tag and publish the archive to the rugs-release repository.
 [cli]: https://github.com/atomist/rug-cli
 [semver]: http://semver.org
 
+### UpdateTravisMaven
+
+The UpdateTravisMaven Editor overwrites the `.settings.xml` and
+`travis-build.bash` files in a [Maven][mvn] project with the latest
+standard versions.
+
+[mvn]: https://maven.apache.org/
+
+#### Prerequisites
+
+Before running this Editor, you must have the following prerequisites
+satisfied.
+
+*   A GitHub repository for a project built with Maven cloned locally.
+
+#### Parameters
+
+This Editor has no parameters.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd to/your/rug/archive/repo
+$ rug edit atomist-rugs:travis-editors:UpdateTravisMaven
+```
+
+If the project is a Maven project, this will upsert `.settings.xml`
+and `travis-build.bash` files in the top-level directory of the
+project.  If you are happy with the change, commit the changes made by
+the Editor and push the commit to GitHub.
+
 ## Support
 
 General support questions should be discussed in the `#support`
