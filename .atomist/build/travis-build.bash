@@ -55,6 +55,13 @@ function main () {
     fi
     rug="$rug -qurX"
 
+    local cli_user=$HOME/.atomist/cli.yml
+    if ! install --mode=0600 "$build_dir/cli-build.yml" "$cli_user"; then
+        err "failed to install build cli.yml"
+        return 1
+    fi
+    trap "rm -f $cli_user" RETURN
+
     if [[ -f .atomist/package.json ]]; then
         msg "running npm install"
         if ! ( cd .atomist && npm install ); then
@@ -114,7 +121,7 @@ function main () {
     msg "archive version: $project_version"
 
     if [[ $TRAVIS_BRANCH == master || $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        if ! cp "$cli_yml" $HOME/.atomist/cli.yml; then
+        if ! install --mode=0600 "$cli_yml" "$cli_user"; then
             err "failed to install $cli_yml"
             return 1
         fi
