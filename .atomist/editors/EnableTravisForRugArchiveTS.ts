@@ -28,7 +28,7 @@ abstract class ContentInfo extends ParametersSupport {
 
     @parameter({
         displayName: "Repo Slug",
-        description: "GitHib repo slug of the form 'owner/repo'",
+        description: "GitHub repo slug of the form 'owner/repo'",
         validInput: "An existing Github repository slug of the form 'owner/repo', must be 3-100 characters long",
         minLength: 3,
         maxLength: 100,
