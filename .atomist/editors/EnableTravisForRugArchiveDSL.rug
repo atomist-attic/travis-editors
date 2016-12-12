@@ -65,7 +65,6 @@ param maven_user: ^.*$
 @maxLength 100
 param maven_token: ^.*$
 
-let templateDir = ".atomist/templates/"
 let buildDir = ".atomist/build"
 let travisBuild = "travis-build.bash"
 let cliRelease = "cli-release.yml"
@@ -73,16 +72,13 @@ let cliDev = "cli-dev.yml"
 
 with project p when directoryExists ".atomist"
   begin
-    do merge "travis.yml.vm" to ".travis.yml"
+    do merge "travis.yml-rug.vm" to ".travis.yml"
 
     do deleteFile travisBuild
     do addDirectoryAndIntermediates buildDir
-    do deleteFile { buildDir + "/" + travisBuild }
-    do copyEditorBackingFileOrFail { templateDir + travisBuild } { buildDir + "/" + travisBuild }
-    do deleteFile { buildDir + "/" + cliRelease }
-    do copyEditorBackingFileOrFail { templateDir + cliRelease } { buildDir + "/" + cliRelease }
-    do deleteFile { buildDir + "/" + cliDev }
-    do copyEditorBackingFileOrFail { templateDir + cliDev } { buildDir + "/" + cliDev }
+    do merge { travisBuild + "-rug.vm" } to { buildDir + "/" + travisBuild }
+    do merge { cliRelease + ".vm" } to { buildDir + "/" + cliRelease }
+    do merge { cliDev + ".vm" } to { buildDir + "/" + cliDev }
 
     with travis t when path = ".travis.yml"
       begin

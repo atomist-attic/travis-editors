@@ -103,17 +103,15 @@ class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
 
     edit(project: Project, @parameters("ContentInfo") p: ContentInfo): Result {
         if (project.directoryExists(".atomist")) {
-            let travisBuild: string = "travis-build.bash"
-            project.deleteFile(travisBuild)
+            project.merge("travis.yml-rug.vm", ".travis.yml", { "maven_base_url": p.maven_base_url });
 
-            project.merge("travis.yml.vm", ".travis.yml", { "maven_base_url": p.maven_base_url });
-
-            let buildDir: string = ".atomist/build"
-            project.addDirectory(buildDir, ".")
-            for (let f of [travisBuild, "cli-release.yml", "cli-dev.yml"]) {
-                let dest = buildDir + "/" + f
-                project.deleteFile(dest)
-                project.copyEditorBackingFileOrFail(".atomist/templates/" + f, dest);
+            let travisBuild: string = "travis-build.bash";
+            project.deleteFile(travisBuild);
+            let buildDir: string = ".atomist/build";
+            project.addDirectoryAndIntermediates(buildDir);
+            project.merge(travisBuild + "-rug.vm", buildDir + "/" + travisBuild, {});
+            for (let f of ["cli-release.yml", "cli-dev.yml"]) {
+                project.merge(f + ".vm", buildDir + "/" + f, {});
             }
 
             var pe = new PathExpression<Project, Travis>(`->travis`);

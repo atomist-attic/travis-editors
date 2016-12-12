@@ -53,7 +53,7 @@ function main () {
             return 1
         fi
     fi
-    rug="$rug -qX"
+    rug="$rug -qurX"
 
     if [[ -f .atomist/package.json ]]; then
         msg "running npm install"

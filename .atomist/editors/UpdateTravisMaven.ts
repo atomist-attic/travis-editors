@@ -28,7 +28,7 @@ class UpdateTravisMaven extends ParameterlessProjectEditor {
     editWithoutParameters(project: Project): Result {
         if (project.fileExists("pom.xml")) {
             project.merge("settings.xml.vm", ".settings.xml", {});
-            project.merge("travis-build-mvn.bash.vm", "travis-build.bash", {});
+            project.merge("travis-build.bash-mvn.vm", "travis-build.bash", {});
             return new Result(Status.Success, "Update Travis Maven build files")
         } else {
             return new Result(Status.NoChange, "Not a Maven build")
