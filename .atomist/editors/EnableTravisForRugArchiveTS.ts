@@ -110,7 +110,7 @@ class EnableTravisForRugArchiveTS implements ProjectEditor<Parameters>  {
             let buildDir: string = ".atomist/build";
             project.addDirectoryAndIntermediates(buildDir);
             project.merge(travisBuild + "-rug.vm", buildDir + "/" + travisBuild, {});
-            for (let f of ["cli-release.yml", "cli-dev.yml"]) {
+            for (let f of ["cli-build.yml", "cli-release.yml", "cli-dev.yml"]) {
                 project.merge(f + ".vm", buildDir + "/" + f, {});
             }
 

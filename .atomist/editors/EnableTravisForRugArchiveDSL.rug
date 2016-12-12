@@ -67,6 +67,7 @@ param maven_token: ^.*$
 
 let buildDir = ".atomist/build"
 let travisBuild = "travis-build.bash"
+let cliBuild = "cli-build.yml"
 let cliRelease = "cli-release.yml"
 let cliDev = "cli-dev.yml"
 
@@ -77,6 +78,7 @@ with project p when directoryExists ".atomist"
     do deleteFile travisBuild
     do addDirectoryAndIntermediates buildDir
     do merge { travisBuild + "-rug.vm" } to { buildDir + "/" + travisBuild }
+    do merge { cliBuild + ".vm" } to { buildDir + "/" + cliBuild }
     do merge { cliRelease + ".vm" } to { buildDir + "/" + cliRelease }
     do merge { cliDev + ".vm" } to { buildDir + "/" + cliDev }
 
