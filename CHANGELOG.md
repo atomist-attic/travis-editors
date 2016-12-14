@@ -7,7 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.4.0...HEAD
+
+## [0.4.0] - 2016-12-14
+
+[0.4.0]: https://github.com/atomist-rugs/travis-editors/compare/0.3.0...0.4.0
+
+Wrapping paper release
+
+### Added
+
+-   Tags on UpdateTravisMavenBuild Executor
+
+### Changed
+
+-   New packaging available in rug-cli allows Rugs to be run from anywhere
+
+### Fixed
+
+-   Documentation fixes and improvements
 
 ## [0.3.0] - 2016-12-09
 
