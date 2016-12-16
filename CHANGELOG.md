@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.5.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.6.0...HEAD
+
+## [0.6.0] - 2016-12-16
+
+[0.6.0]: https://github.com/atomist-rugs/travis-editors/compare/0.5.0...0.6.0
+
+New Typescript API release
+
+### Changed
+
+-   Upgrade rug to 0.7.0 which changes the Typescript programming model significantly
 
 ## [0.5.0] - 2016-12-14
 
