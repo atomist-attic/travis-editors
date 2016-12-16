@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/atomist-rugs/travis-editors",
   "dependencies": {
-    "@atomist/travis": "0.3.0",
-    "@atomist/rug": "0.6.0"
+    "@atomist/travis": "0.3.2",
+    "@atomist/rug": "0.7.0"
   },
   "scripts": {
     "rug-install": "rug install -urX",

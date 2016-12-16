@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-import { ParameterlessProjectEditor } from '@atomist/rug/operations/ProjectEditor'
+import { ProjectEditor } from '@atomist/rug/operations/ProjectEditor'
 import { Project } from '@atomist/rug/model/Core'
-import { editor, tag } from '@atomist/rug/support/Metadata'
 import { Result, Status } from '@atomist/rug/operations/Result'
 
-@editor("Update the Travis Maven build files")
-@tag("travis-ci")
-@tag("continous-integration")
-@tag("maven")
-class UpdateTravisMaven extends ParameterlessProjectEditor {
+class UpdateTravisMaven implements ProjectEditor {
 
-    editWithoutParameters(project: Project): Result {
+    tags: string[] = ["travis-ci","continous-integration","maven"]
+    name: string = "UpdateTravisMaven"
+    description: string = "Update the Travis Maven build files"
+    edit(project: Project): Result {
         if (project.fileExists("pom.xml")) {
             project.merge("settings.xml.vm", ".settings.xml", {});
             project.merge("travis-build.bash-mvn.vm", "travis-build.bash", {});
@@ -35,3 +33,5 @@ class UpdateTravisMaven extends ParameterlessProjectEditor {
         }
     }
 }
+
+let travis = new UpdateTravisMaven()
