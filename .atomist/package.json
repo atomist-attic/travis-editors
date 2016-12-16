@@ -1,6 +1,6 @@
 {
   "name": "@atomist-rugs/travis-editors",
-  "version": "0.7.0",
+  "version": "0.6.0",
   "description": "Editors for enabling Travis CI",
   "keywords": [
     "Atomist",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/atomist-rugs/travis-editors",
   "dependencies": {
-    "@atomist/travis": "0.3.0",
+    "@atomist/travis": "0.3.2",
     "@atomist/rug": "0.7.0"
   },
   "scripts": {

@@ -3,10 +3,10 @@
 [![Build Status](https://travis-ci.org/atomist-rugs/travis-editors.svg?branch=master)](https://travis-ci.org/atomist-rugs/travis-editors)
 [![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
 
-This [Rug](http://docs.atomist.com/) archive has an editors that
-enable and configure a [Travis CI](https://travis-ci.org/) build for a
-GitHub repository.  These Rugs work with both public (travis-ci.org)
-and private (travis-ci.com) builds.
+This [Rug](http://docs.atomist.com/) archive has editors that enable
+and configure a [Travis CI](https://travis-ci.org/) build for a GitHub
+repository.  These Rugs work with both public (travis-ci.org) and
+private (travis-ci.com) builds.
 
 ## Rugs
 
@@ -128,7 +128,7 @@ the Editor and push the commit to GitHub.
 
 General support questions should be discussed in the `#support`
 channel on our community slack team
-at [atomist-community.slack.com](https://join.atomist.com).
+at [atomist-community.slack.com][slack].
 
 If you find a problem, please create an [issue][].
 
@@ -144,7 +144,8 @@ dependencies are available locally by running `npm install`.
 [cli]: https://github.com/atomist/rug-cli
 
 ```sh
-$ ( cd .atomist && npm install )
+$ cd .atomist
+$ npm install
 $ rug test
 $ rug install
 ```
@@ -164,4 +165,8 @@ of the release notes.  It will also automatically upload the needed
 artifacts.
 
 ---
-Created by Atomist. Need Help? <a href="https://join.atomist.com/">Join our Slack team</a>
+Created by [Atomist][atomist].
+Need Help?  [Join our Slack team][slack].
+
+[atomist]: https://www.atomist.com/
+[slack]: https://join.atomist.com/

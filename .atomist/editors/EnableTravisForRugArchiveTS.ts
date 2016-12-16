@@ -15,7 +15,6 @@
  */
 
 import { ProjectEditor } from "@atomist/rug/operations/ProjectEditor"
-import { Parameters, ParametersSupport } from "@atomist/rug/operations/Parameters"
 import { Status, Result, Parameter } from "@atomist/rug/operations/RugOperation"
 import { Project, Pair, File } from '@atomist/rug/model/Core'
 import { PathExpression, PathExpressionEngine, TreeNode, Match } from '@atomist/rug/tree/PathExpression'
@@ -24,62 +23,62 @@ import { Travis } from '@atomist/travis/core/Core'
 
 
 let params: Parameter[] = [
-  {
-      name: "repo_slug",
-      displayName: "Repo Slug",
-      description: "GitHub repo slug of the form 'owner/repo'",
-      validInput: "An existing Github repository slug of the form 'owner/repo', must be 3-100 characters long",
-      minLength: 3,
-      maxLength: 100,
-      pattern: "^[-\\w.]+/[-\\w.]+$",
-  },
-  {
-      name: "org",
-      displayName: "Travis CI Endpoint",
-      description: "Specify the Travis CI .org or .com endpoint",
-      validInput: "Either '.org' or '.com'",
-      minLength: 4,
-      maxLength: 4,
-      default: ".org",
-      pattern: "^\\.(org|com)$",
-  },
-  {
-      name: "github_token",
-      displayName: "GitHub Token",
-      description: "GitHub Personal Access Token of the repo owner with the following scopes: repo, write:repo_hook, user:email, and read:org, generated at https://github.com/settings/tokens; if the repo owner is an organization, the token must belong to a user in the Owner group of the organization",
-      validInput: "A valid 40-character, lower-case hexadecimal GitHub Personal Access token",
-      minLength: 40,
-      maxLength: 40,
-      pattern: "^[a-f0-9]{40}$",
-  },
-  {
-      name: "maven_base_url",
-      displayName: "Maven Base URL",
-      description: "The URL for a Maven-compatible repository, without the trailing repository name, e.g., if the Maven repository URL is 'https://atomist.jfrog.io/atomist/rugs-release', then you would provide 'https://atomist.jfrog.io/atomist' for this value",
-      validInput: "A valid URL starting with http, https, or ftp, must be 7-100 characters long",
-      minLength: 7,
-      maxLength: 100,
-      default: "https://atomist.jfrog.io/atomist",
-      pattern: "@url",
-  },
-  {
-      name: "maven_user",
-      displayName: "Maven User",
-      description: "Maven user with write access to the rugs-dev and rugs-release repositories under the Maven Base URL",
-      validInput: "A valid user name for the rugs-dev and rugs-release Maven repository under the Maven Base URL, must be 1-100 characters long",
-      minLength: 1,
-      maxLength: 100,
-      pattern: "^.*$",
-  },
-  {
-      name: "maven_token",
-      displayName: "Maven Token",
-      description: "API token or password for the Maven User",
-      validInput: "A valid user authentication token, i.e., API token or password, for Maven User, must be 1-100 characters long",
-      minLength: 1,
-      maxLength: 100,
-      pattern: "^.*$",
-  }
+    {
+        name: "repo_slug",
+        displayName: "Repo Slug",
+        description: "GitHub repo slug of the form 'owner/repo'",
+        validInput: "An existing Github repository slug of the form 'owner/repo', must be 3-100 characters long",
+        minLength: 3,
+        maxLength: 100,
+        pattern: "^[-\\w.]+/[-\\w.]+$",
+    },
+    {
+        name: "org",
+        displayName: "Travis CI Endpoint",
+        description: "Specify the Travis CI .org or .com endpoint",
+        validInput: "Either '.org' or '.com'",
+        minLength: 4,
+        maxLength: 4,
+        default: ".org",
+        pattern: "^\\.(org|com)$",
+    },
+    {
+        name: "github_token",
+        displayName: "GitHub Token",
+        description: "GitHub Personal Access Token of the repo owner with the following scopes: repo, write:repo_hook, user:email, and read:org, generated at https://github.com/settings/tokens; if the repo owner is an organization, the token must belong to a user in the Owner group of the organization",
+        validInput: "A valid 40-character, lower-case hexadecimal GitHub Personal Access token",
+        minLength: 40,
+        maxLength: 40,
+        pattern: "^[a-f0-9]{40}$",
+    },
+    {
+        name: "maven_base_url",
+        displayName: "Maven Base URL",
+        description: "The URL for a Maven-compatible repository, without the trailing repository name, e.g., if the Maven repository URL is 'https://atomist.jfrog.io/atomist/rugs-release', then you would provide 'https://atomist.jfrog.io/atomist' for this value",
+        validInput: "A valid URL starting with http, https, or ftp, must be 7-100 characters long",
+        minLength: 7,
+        maxLength: 100,
+        default: "https://atomist.jfrog.io/atomist",
+        pattern: "@url",
+    },
+    {
+        name: "maven_user",
+        displayName: "Maven User",
+        description: "Maven user with write access to the rugs-dev and rugs-release repositories under the Maven Base URL",
+        validInput: "A valid user name for the rugs-dev and rugs-release Maven repository under the Maven Base URL, must be 1-100 characters long",
+        minLength: 1,
+        maxLength: 100,
+        pattern: "^.*$",
+    },
+    {
+        name: "maven_token",
+        displayName: "Maven Token",
+        description: "API token or password for the Maven User",
+        validInput: "A valid user authentication token, i.e., API token or password, for Maven User, must be 1-100 characters long",
+        minLength: 1,
+        maxLength: 100,
+        pattern: "^.*$",
+    }
 ]
 
 interface Parameters {
@@ -91,7 +90,7 @@ interface Parameters {
     maven_token: string
 }
 
-class EnableTravisForRugArchiveTS implements ProjectEditor  {
+class EnableTravisForRugArchiveTS implements ProjectEditor {
 
     tags: string[] = ["travis-ci", "continuous-integration", "github", "rug"]
     name: string = "EnableTravisForRugArchiveTS"
