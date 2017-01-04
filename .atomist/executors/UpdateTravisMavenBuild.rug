@@ -20,5 +20,5 @@
 @tag "maven"
 executor UpdateTravisMavenBuild
 
-with services s
+with Services s
   editWith UpdateTravisMaven

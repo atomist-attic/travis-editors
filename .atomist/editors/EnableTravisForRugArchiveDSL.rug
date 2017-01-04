@@ -71,7 +71,7 @@ let cliBuild = "cli-build.yml"
 let cliRelease = "cli-release.yml"
 let cliDev = "cli-dev.yml"
 
-with project p when directoryExists ".atomist"
+with Project p when directoryExists ".atomist"
   begin
     do merge "travis.yml-rug.vm" to ".travis.yml"
 

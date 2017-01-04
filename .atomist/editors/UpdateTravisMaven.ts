@@ -16,7 +16,7 @@
 
 import { ProjectEditor } from '@atomist/rug/operations/ProjectEditor'
 import { Project } from '@atomist/rug/model/Core'
-import { Result, Status } from '@atomist/rug/operations/Result'
+import { Result, Status } from '@atomist/rug/operations/RugOperation'
 
 class UpdateTravisMaven implements ProjectEditor {
 
