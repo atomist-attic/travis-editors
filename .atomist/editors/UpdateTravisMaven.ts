@@ -20,7 +20,7 @@ import { Result, Status } from '@atomist/rug/operations/RugOperation'
 
 class UpdateTravisMaven implements ProjectEditor {
 
-    tags: string[] = ["travis-ci","continous-integration","maven"]
+    tags: string[] = ["travis-ci", "continous-integration", "maven"]
     name: string = "UpdateTravisMaven"
     description: string = "Update the Travis Maven build files"
     edit(project: Project): Result {

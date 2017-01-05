@@ -44,7 +44,7 @@ param org: ^\.(org|com)$
 param github_token: ^[a-f0-9]{40}$
 
 @displayName "Maven Base URL"
-@description "The URL for a Maven-compatible repository, without the trailing repository name, e.g., if the Maven repository URL is 'https//atomist.jfrog.io/atomist/rugs-release', then you would provide 'https//atomist.jfrog.io/atomist' for this value"
+@description "The URL for a Maven-compatible repository, without the trailing repository name, e.g., if the Maven repository URL is 'https://atomist.jfrog.io/atomist/rugs-release', then you would provide 'https://atomist.jfrog.io/atomist' for this value"
 @validInput "A valid URL starting with http, https, or ftp, must be 7-100 characters long"
 @minLength 7
 @maxLength 100
@@ -82,7 +82,7 @@ with Project p when directoryExists ".atomist"
     do merge { cliRelease + ".vm" } to { buildDir + "/" + cliRelease }
     do merge { cliDev + ".vm" } to { buildDir + "/" + cliDev }
 
-    with travis t when path = ".travis.yml"
+    with Travis t when path = ".travis.yml"
       begin
         do enable repo_slug github_token org
         do encrypt repo_slug github_token org { "GITHUB_TOKEN=" + github_token }

@@ -16,9 +16,9 @@
   "bugs": {
     "url": "https://github.com/atomist-rugs/travis-editors/issues"
   },
-  "homepage": "https://github.com/atomist-rugs/travis-editors",
+  "homepage": "https://github.com/atomist-rugs/travis-editors#readme",
   "dependencies": {
-    "@atomist/travis": "0.3.2",
+    "@atomist/travis": "0.5.1",
     "@atomist/rug": "0.8.0"
   },
   "scripts": {

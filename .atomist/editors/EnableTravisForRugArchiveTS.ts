@@ -96,7 +96,7 @@ let editor: ProjectEditor = {
     description: "Enable Travis CI for a Rug Archive project (Rug TypeScript version)",
     parameters: params,
     edit(project: Project, p: Parameters): Result {
-        
+
         let eng: PathExpressionEngine = project.context().pathExpressionEngine()
 
         if (project.directoryExists(".atomist")) {
@@ -111,7 +111,7 @@ let editor: ProjectEditor = {
                 project.merge(f + ".vm", buildDir + "/" + f, {});
             }
 
-            var pe = new PathExpression<Project, Travis>(`//travis()`);
+            var pe = new PathExpression<Project, Travis>(`/Travis()`);
             let t: Travis = eng.scalar(project, pe);
             t.enable(p.repo_slug, p.github_token, p.org);
             t.encrypt(p.repo_slug, p.github_token, p.org, "GITHUB_TOKEN=" + p.github_token);

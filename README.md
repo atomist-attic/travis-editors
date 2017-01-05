@@ -38,15 +38,29 @@ To run this editor, you must supply the following parameters.
     `atomist-rugs/common-editors`.
 *   `github_token`: A [GitHub Personal Access Token][gh-token] with
     the following scopes:
+
     -    `repo`: for Travis CI, creating tags
     -    `write:repo_hook`: for Travis CI
     -    `user:email`: for Travis CI
     -    `read:org`: for Travis CI
 
-    The token must be a from a GitHub user who is an owner of the
-    repository.  If the owner of the repository is a GitHub
-    organization, this means the token must be from a user in the
-    Owner group.
+    This token is used by Travis CI to authenticate to GitHub for
+    these edits.  It is not needed and can be deleted after the Editor
+    completes.  These above scopes are a union of the permissions
+    required by Travis CI to for both public and private GitHub
+    repositories.  The token must be a from a GitHub user who is an
+    owner of the repository.  If the owner of the repository is a
+    GitHub organization, this means the token must be from a user in
+    the Owner group.  Sometimes the scopes required by Travis CI
+    change.  You can get the current list of scopes directly from
+    Travis CI.  Change `ENDPOINT` to `com` if running the Editor on
+    private repositories or `org` if running the Editor on public
+    repositories.  If you want to use the same token for both, run the
+    command below against both endpoints and create a token with a
+    union of the scopes.
+
+        $ curl -s -H 'Content-Type: application/json' -H 'User-Agent: CurlClient/1.0.0' -H 'Accept: application/vnd.travis-ci.2+json' https://api.travis-ci.ENDPOINT/config | jq .config.github.scopes
+
 *   `org`: Select which Travis CI endpoint to use.  Set to `.org` if
     `repo_slug` is a public repository and `.com` if it is a private
     repository.
