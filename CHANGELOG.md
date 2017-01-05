@@ -7,7 +7,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.6.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.7.0...HEAD
+
+## [0.7.0] - 2016-01-05
+
+[0.7.0]: https://github.com/atomist-rugs/travis-editors/compare/0.6.0...0.7.0
+
+Brand new rug and type release
+
+### Changed
+
+-   Upgrade rug to 0.8.0
+
+-   Upgrade to travis-rug-type 0.5.1
+
+### Fixed
+
+-   Re-implement authenticating with GitHub token
 
 ## [0.6.0] - 2016-12-16
 
