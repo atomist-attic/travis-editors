@@ -90,14 +90,13 @@ interface Parameters {
     maven_token: string
 }
 
-class EnableTravisForRugArchiveTS implements ProjectEditor {
-
-    tags: string[] = ["travis-ci", "continuous-integration", "github", "rug"]
-    name: string = "EnableTravisForRugArchiveTS"
-    description: string = "Enable Travis CI for a Rug Archive project (Rug TypeScript version)"
-
+let editor: ProjectEditor = {
+    tags: ["travis-ci", "continuous-integration", "github", "rug"],
+    name: "EnableTravisForRugArchiveTS",
+    description: "Enable Travis CI for a Rug Archive project (Rug TypeScript version)",
+    parameters: params,
     edit(project: Project, p: Parameters): Result {
-
+        
         let eng: PathExpressionEngine = project.context().pathExpressionEngine()
 
         if (project.directoryExists(".atomist")) {
@@ -112,7 +111,7 @@ class EnableTravisForRugArchiveTS implements ProjectEditor {
                 project.merge(f + ".vm", buildDir + "/" + f, {});
             }
 
-            var pe = new PathExpression<Project, Travis>(`->travis`);
+            var pe = new PathExpression<Project, Travis>(`//travis()`);
             let t: Travis = eng.scalar(project, pe);
             t.enable(p.repo_slug, p.github_token, p.org);
             t.encrypt(p.repo_slug, p.github_token, p.org, "GITHUB_TOKEN=" + p.github_token);
@@ -126,4 +125,3 @@ class EnableTravisForRugArchiveTS implements ProjectEditor {
     }
 
 }
-let editor = new EnableTravisForRugArchiveTS()
