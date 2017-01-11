@@ -18,3 +18,29 @@ editor:
     - "maven_user": "t************h"
     - "maven_token": "A***********************************************************************i"
 
+---
+kind: "operation"
+client: "rug-cli 0.20.0-SNAPSHOT"
+editor:
+  name: "UpdateTravisMaven"
+  group: "atomist-rugs"
+  artifact: "travis-editors"
+  version: "0.7.0"
+  origin:
+    repo: "atomist-rugs/travis-editors.git"
+    branch: "master"
+    sha: "b910aef*"
+
+---
+kind: "operation"
+client: "rug-cli 0.20.0-SNAPSHOT"
+editor:
+  name: "UpdateTravisMaven"
+  group: "atomist-rugs"
+  artifact: "travis-editors"
+  version: "0.7.0"
+  origin:
+    repo: "atomist-rugs/travis-editors.git"
+    branch: "master"
+    sha: "b910aef*"
+

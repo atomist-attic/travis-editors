@@ -31,6 +31,7 @@ let params: Parameter[] = [
         minLength: 3,
         maxLength: 100,
         pattern: "^[-\\w.]+/[-\\w.]+$",
+        required: true
     },
     {
         name: "org",
@@ -41,6 +42,7 @@ let params: Parameter[] = [
         maxLength: 4,
         default: ".org",
         pattern: "^\\.(org|com)$",
+        required: true
     },
     {
         name: "github_token",
@@ -50,6 +52,7 @@ let params: Parameter[] = [
         minLength: 40,
         maxLength: 40,
         pattern: "^[a-f0-9]{40}$",
+        required: true
     },
     {
         name: "maven_base_url",
@@ -60,6 +63,7 @@ let params: Parameter[] = [
         maxLength: 100,
         default: "https://atomist.jfrog.io/atomist",
         pattern: "@url",
+        required: true
     },
     {
         name: "maven_user",
@@ -69,6 +73,7 @@ let params: Parameter[] = [
         minLength: 1,
         maxLength: 100,
         pattern: "^.*$",
+        required: true
     },
     {
         name: "maven_token",
@@ -123,5 +128,4 @@ let editor: ProjectEditor = {
             return new Result(Status.NoChange, "Repository does not contain a Rug Archive")
         }
     }
-
 }
