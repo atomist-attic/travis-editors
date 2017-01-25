@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.7.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.8.0...HEAD
+
+## [0.8.0] - 2016-01-25
+
+Export vars release
+
+## Changed
+
+-   Now export editor vars explicitly as per Rug changes
+
+[0.8.0]: https://github.com/atomist-rugs/travis-editors/compare/0.7.0...0.8.0
 
 ## [0.7.0] - 2016-01-05
 

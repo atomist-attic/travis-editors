@@ -95,7 +95,7 @@ interface Parameters {
     maven_token: string
 }
 
-let editor: ProjectEditor = {
+export let editor: ProjectEditor = {
     tags: ["travis-ci", "continuous-integration", "github", "rug"],
     name: "EnableTravisForRugArchiveTS",
     description: "Enable Travis CI for a Rug Archive project (Rug TypeScript version)",
