@@ -52,7 +52,9 @@ let params: Parameter[] = [
         minLength: 40,
         maxLength: 40,
         pattern: "^[a-f0-9]{40}$",
-        required: true
+        required: false,
+        displayable: false,
+        tags: ["atomist/github/user_token=repo"]
     },
     {
         name: "maven_base_url",
@@ -63,7 +65,7 @@ let params: Parameter[] = [
         maxLength: 100,
         default: "https://atomist.jfrog.io/atomist",
         pattern: "@url",
-        required: true
+        required: false
     },
     {
         name: "maven_user",
@@ -73,7 +75,9 @@ let params: Parameter[] = [
         minLength: 1,
         maxLength: 100,
         pattern: "^.*$",
-        required: true
+        required: false,
+        displayable: false,
+        tags: ["atomist/secret=maven_user"]
     },
     {
         name: "maven_token",
@@ -83,6 +87,9 @@ let params: Parameter[] = [
         minLength: 1,
         maxLength: 100,
         pattern: "^.*$",
+        required: false,
+        displayable: false,
+        tags: ["atomist/secret=maven_token"]
     }
 ]
 
@@ -117,7 +124,7 @@ export let editor: ProjectEditor = {
             }
 
             var pe = new PathExpression<Project, Travis>(`/Travis()`);
-            let t: Travis = eng.scalar(project, pe);
+            let t: Travis = eng.scalar(project, pe) as any;
             t.enable(p.repo_slug, p.github_token, p.org);
             t.encrypt(p.repo_slug, p.github_token, p.org, "GITHUB_TOKEN=" + p.github_token);
             t.encrypt(p.repo_slug, p.github_token, p.org, "MAVEN_USER=" + p.maven_user);
