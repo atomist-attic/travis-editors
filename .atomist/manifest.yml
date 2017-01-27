@@ -1,6 +1,6 @@
 group: atomist-rugs
 artifact: travis-editors
-version: "0.10.2"
+version: "0.10.3"
 requires: "0.10.0"
 dependencies:
 extensions:

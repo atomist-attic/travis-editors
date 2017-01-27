@@ -88,7 +88,7 @@ var enableTravisForRugArchive: Executor = {
     parameters: params,
     execute(services: Services, p: Parameters): Result {
         for (let s of services.services()) {
-          s.editWith("EnableTravisForRugArchiveTS", p)
+          s.editWith("EnableTravisForRugArchiveTS", {repo_slug: p.repo_slug, org: p.org, github_token: p.github_token, maven_user: p.maven_user, maven_token: p.maven_token, maven_base_url: p.maven_base_url})
         }
         return new Result(Status.Success, "OK")
     }
