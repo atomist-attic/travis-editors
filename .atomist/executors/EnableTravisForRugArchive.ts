@@ -29,9 +29,9 @@ let params: Parameter[] = [
         displayName: "GitHub Token",
         description: "GitHub Personal Access Token of the repo owner with the following scopes: repo, write:repo_hook, user:email, and read:org, generated at https://github.com/settings/tokens; if the repo owner is an organization, the token must belong to a user in the Owner group of the organization",
         validInput: "A valid 40-character, lower-case hexadecimal GitHub Personal Access token",
-        minLength: 40,
-        maxLength: 40,
-        pattern: "^[a-f0-9]{40}$",
+        minLength: 0,
+        pattern: "^.*$",
+        maxLength: 100,
         required: false,
         displayable: false,
         tags: ["atomist/github/user_token=repo,write:repo_hook,user:email,read:org"]
