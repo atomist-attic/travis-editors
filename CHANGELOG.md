@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.8.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.9.0...HEAD
+
+## [0.9.0] - 2016-01-26
+
+Bot release
+
+## Changed
+
+-   `EnableTravisForRugArchiveTS` can now be run from the bot
 
 ## [0.8.0] - 2016-01-25
 
