@@ -45,7 +45,7 @@ let params: Parameter[] = [
         required: false
     },
     {
-        name: "token",
+        name: "github_token",
         displayName: "GitHub Token",
         description: "GitHub Personal Access Token of the repo owner with the following scopes: repo, write:repo_hook, user:email, and read:org, generated at https://github.com/settings/tokens; if the repo owner is an organization, the token must belong to a user in the Owner group of the organization",
         validInput: "A valid 40-character, lower-case hexadecimal GitHub Personal Access token",
@@ -108,7 +108,6 @@ export let editor: ProjectEditor = {
     description: "Enable Travis CI for a Rug Archive project (Rug TypeScript version)",
     parameters: params,
     edit(project: Project, p: Parameters): Result {
-
         let eng: PathExpressionEngine = project.context().pathExpressionEngine()
 
         if (project.directoryExists(".atomist")) {
