@@ -42,7 +42,7 @@ let params: Parameter[] = [
         maxLength: 4,
         default: ".org",
         pattern: "^\\.(org|com)$",
-        required: true
+        required: false
     },
     {
         name: "github_token",
