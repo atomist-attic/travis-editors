@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.11.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.12.0...HEAD
+
+## [0.12.0] - 2016-01-29
+
+## Changed
+
+-   Archive group for `rug publish` is always read from TRAVIS_REPO_SLUG now
 
 ## [0.11.0] - 2016-01-27
 

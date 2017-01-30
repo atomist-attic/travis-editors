@@ -4,14 +4,22 @@ import { Result, Status, Parameter } from "@atomist/rug/operations/RugOperation"
 
 let params: Parameter[] = [
     {
-        name: "repo_slug",
-        displayName: "Repo Slug",
-        description: "GitHub repo slug of the form 'owner/repo'",
-        validInput: "An existing Github repository slug of the form 'owner/repo', must be 3-100 characters long",
-        minLength: 3,
+        name: "owner",
+        description: "GitHub Owner",
+        pattern: "^.*$",
         maxLength: 100,
-        pattern: "^[-\\w.]+/[-\\w.]+$",
-        required: true
+        required: true,
+        displayable: false,
+        tags: ["atomist/owner"]
+    },
+    {
+        name: "repo",
+        description: "GitHub Repository",
+        pattern: "^.*$",
+        maxLength: 100,
+        required: true,
+        displayable: false,
+        tags: ["atomist/repository"]
     },
     {
         name: "org",
@@ -74,7 +82,8 @@ let params: Parameter[] = [
 ]
 
 interface Parameters {
-    repo_slug: string
+    owner: string
+    repo: string
     org: string
     github_token: string
     maven_base_url: string
@@ -88,8 +97,16 @@ var enableTravisForRugArchive: Executor = {
     tags: ["atomist/intent=enable travis", "atomist/private=false"],
     parameters: params,
     execute(services: Services, p: Parameters): Result {
+        let repo_slug = `${p.owner}/${p.repo}`
         for (let s of services.services()) {
-          s.editWith("EnableTravisForRugArchiveTS", {repo_slug: p.repo_slug, org: p.org, github_token: p.github_token, maven_user: p.maven_user, maven_token: p.maven_token, maven_base_url: p.maven_base_url})
+            s.editWith("EnableTravisForRugArchiveTS", {
+              repo_slug: repo_slug,
+              org: p.org,
+              github_token: p.github_token,
+              maven_user: p.maven_user,
+              maven_token: p.maven_token,
+              maven_base_url: p.maven_base_url
+            })
         }
         return new Result(Status.Success, "OK")
     }

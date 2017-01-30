@@ -1,22 +1,4 @@
 {
-  "name": "@atomist-rugs/travis-editors",
-  "version": "0.8.0",
-  "description": "Editors for enabling Travis CI",
-  "keywords": [
-    "Atomist",
-    "Rug",
-    "Travis"
-  ],
-  "author": "Atomist, Inc",
-  "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/atomist-rugs/travis-editors.git"
-  },
-  "bugs": {
-    "url": "https://github.com/atomist-rugs/travis-editors/issues"
-  },
-  "homepage": "https://github.com/atomist-rugs/travis-editors#readme",
   "dependencies": {
     "@atomist/travis": "0.5.1",
     "@atomist/rug": "0.10.0"
