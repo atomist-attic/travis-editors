@@ -18,11 +18,11 @@ import { ProjectEditor } from '@atomist/rug/operations/ProjectEditor'
 import { Project } from '@atomist/rug/model/Core'
 import { Result, Status } from '@atomist/rug/operations/RugOperation'
 
-class UpdateTravisMaven implements ProjectEditor {
-
-    tags: string[] = ["travis-ci", "continous-integration", "maven"]
-    name: string = "UpdateTravisMaven"
-    description: string = "Update the Travis Maven build files"
+export let updateTravisMaven: ProjectEditor = {
+    name: "UpdateTravisMaven",
+    description: "Update the Travis Maven build files",
+    tags: ["travis-ci", "continous-integration", "maven"],
+    parameters: [],
     edit(project: Project): Result {
         if (project.fileExists("pom.xml")) {
             project.merge("settings.xml.vm", ".settings.xml", {});
@@ -33,5 +33,3 @@ class UpdateTravisMaven implements ProjectEditor {
         }
     }
 }
-
-let travis = new UpdateTravisMaven()
