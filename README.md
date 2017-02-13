@@ -8,6 +8,8 @@ and configure a [Travis CI](https://travis-ci.org/) build for a GitHub
 repository.  These Rugs work with both public (travis-ci.org) and
 private (travis-ci.com) builds.
 
+This project uses an extended version of the Rug language, using the [Travis language extension](https://github.com/atomist-rugs/travis-rug-type).
+
 ## Rugs
 
 ### EnableTravisForRugArchiveDSL and EnableTravisForRugArchiveTS
