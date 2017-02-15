@@ -7,9 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.12.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/travis-editors/compare/0.13.0...HEAD
+
+## [0.13.0] - 2016-02-15
+
+[0.13.0]: https://github.com/atomist-rugs/travis-editors/compare/0.12.0...0.13.0
+
+## Changed
+
+-   Updated to rug 0.12.0 and travis-rug-type 0.9.1
 
 ## [0.12.0] - 2016-01-29
+
+[0.12.0]: https://github.com/atomist-rugs/travis-editors/compare/0.11.0...0.12.0
 
 ## Changed
 
@@ -17,11 +27,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.11.0] - 2016-01-27
 
+[0.11.0]: https://github.com/atomist-rugs/travis-editors/compare/0.10.0...0.11.0
+
 ## Changed
 
 -   Fixed up parameters between `EnableTravisForRugArchiveTS` editor and executor
 
 ## [0.10.0] - 2016-01-26
+
+[0.10.0]: https://github.com/atomist-rugs/travis-editors/compare/0.9.1...0.10.0
 
 ## Added
 
@@ -29,12 +43,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.9.1] - 2016-01-26
 
+[0.9.1]: https://github.com/atomist-rugs/travis-editors/compare/0.9.0...0.9.1
+
 ## Changed
 
 -   Fixed parameter in `EnableTravisForRugArchiveTS` to not declare `required: true`
     and a non-empty default
 
 ## [0.9.0] - 2016-01-26
+
+[0.9.0]: https://github.com/atomist-rugs/travis-editors/compare/0.8.0...0.9.0
 
 Bot release
 
@@ -44,13 +62,13 @@ Bot release
 
 ## [0.8.0] - 2016-01-25
 
+[0.8.0]: https://github.com/atomist-rugs/travis-editors/compare/0.7.0...0.8.0
+
 Export vars release
 
 ## Changed
 
 -   Now export editor vars explicitly as per Rug changes
-
-[0.8.0]: https://github.com/atomist-rugs/travis-editors/compare/0.7.0...0.8.0
 
 ## [0.7.0] - 2016-01-05
 
